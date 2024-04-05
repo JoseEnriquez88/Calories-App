@@ -18,7 +18,7 @@ const routeScreenDefaultOptions = {
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="AddFood" component={AddFood} />
       </Stack.Navigator>

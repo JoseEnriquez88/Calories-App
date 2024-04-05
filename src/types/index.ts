@@ -1,19 +1,16 @@
-export type PostImage = {
-  date?: string;
-  explanation?: string;
-  hdurl?: string;
-  media_type?: string;
-  service_version?: string;
-  title?: string;
-  url?: string;
-};
-
-export type RootStackParams = {
+export type RootStackParamsList = {
   Home: undefined;
-  AddFood: PostImage;
+  AddFood: undefined;
 };
 
 export type AddFoodModalProps = {
-  onClose: () => void;
+  onClose: (shouldUpdate?: boolean) => void;
   visible: boolean;
+};
+
+export type Meal = {
+  calories: string;
+  name: string;
+  portion: string;
+  date?: string;
 };
