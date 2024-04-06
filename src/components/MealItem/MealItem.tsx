@@ -35,7 +35,7 @@ const MealItem: FC<MealItemProps> = ({
     <View style={styles.container}>
       <View style={styles.leftContainer}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.portion}>{portion}</Text>
+        <Text style={styles.portion}>{portion}gr</Text>
       </View>
       <View style={styles.rightContainer}>
         <Button

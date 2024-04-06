@@ -23,7 +23,7 @@ const Header = () => {
       ) : undefined}
       <View style={styles.leftContainer}>
         <Text style={styles.name}>{`Hello ${staticInfo.name}`}</Text>
-        <Text style={styles.subtitle}>Welcome back to your goal.</Text>
+        <Text style={styles.subtitle}>Welcome back to your goal</Text>
       </View>
       <View style={styles.rightContainer}>
         <Image source={{ uri: staticInfo.uri }} style={styles.profileImage} />
