@@ -6,16 +6,45 @@ import { Meal, RootStackParamsList } from "../../types";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Header from "../../components/Header/Header";
 import useFoodStorage from "../../hooks/useFoodStorage";
+import TodaysCalories from "../../components/TodaysCalories/TodaysCalories";
+import TodaysMeals from "../../components/TodaysMeals/TodaysMeals";
+import { TodaysCaloriesProps } from "../../types";
+
+const totalCaloriesPerDay: number = 2000;
 
 const Home = () => {
   const [todaysFood, setTodaysFood] = useState<Meal[]>([]);
+  const [todaysStatistics, setTodaysStatistics] =
+    useState<TodaysCaloriesProps>();
   const { onGetTodaysFood } = useFoodStorage();
   const { navigate } =
     useNavigation<NativeStackNavigationProp<RootStackParamsList, "Home">>();
 
+  const calculatedTodaysStatistics = (meals: Meal[] | undefined) => {
+    try {
+      if (meals) {
+        const caloriesConsumed = meals.reduce(
+          (acum, curr) => acum + Number(curr.calories),
+          0
+        );
+        const remainingCalories = totalCaloriesPerDay - caloriesConsumed;
+        const percentage = (caloriesConsumed / totalCaloriesPerDay) * 10;
+        setTodaysStatistics({
+          consumed: caloriesConsumed,
+          percentage,
+          remaining: remainingCalories,
+          total: totalCaloriesPerDay,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const loadTodaysFood = useCallback(async () => {
     try {
-      const todaysFoodResponse = await onGetTodaysFood();
+      const todaysFoodResponse = (await onGetTodaysFood()) as Meal[];
+      calculatedTodaysStatistics(todaysFoodResponse);
       setTodaysFood(todaysFoodResponse);
     } catch (error) {
       setTodaysFood([]);
@@ -50,6 +79,11 @@ const Home = () => {
           />
         </View>
       </View>
+      <TodaysCalories {...todaysStatistics} />
+      <TodaysMeals
+        foods={todaysFood}
+        onCompleteAddRemove={() => loadTodaysFood()}
+      />
     </View>
   );
 };

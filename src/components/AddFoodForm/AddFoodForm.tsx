@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Modal, View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 import { AddFoodModalProps } from "../../types";
 

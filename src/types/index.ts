@@ -14,3 +14,21 @@ export type Meal = {
   portion: string;
   date?: string;
 };
+
+export type TodaysCaloriesProps = {
+  total: number | string;
+  consumed: number | string;
+  remaining: number | string;
+  percentage: number;
+};
+
+export type TodaysMealProps = {
+  foods: Meal[];
+  onCompleteAddRemove?: () => void;
+};
+
+export type MealItemProps = Meal & {
+  isAbleToAdd?: boolean;
+  onCompleteAddRemove?: () => void;
+  itemPosition?: number;
+};
